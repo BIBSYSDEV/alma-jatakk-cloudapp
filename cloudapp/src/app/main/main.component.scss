@@ -1,0 +1,46 @@
+.entities-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+textarea {
+  padding: 2px;
+  border-width: 1px;
+  $width: calc(100% - 6px);
+  width: $width;
+  max-width: $width;
+  height: 150px;
+  font-family: monospace;
+  font-size: 3em;
+  display: block;
+}
+
+textarea,
+section,
+.mat-card {
+  margin-bottom: 20px;
+}
+
+pre {
+  overflow: auto;
+  max-height: 200px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+pre,
+
+
+p{
+  font-size: x-large;
+}
+.description {
+  p{
+    font-size: x-small;
+  }
+}
+
+.error, .barcodeempty {
+  font-size: large;
+}

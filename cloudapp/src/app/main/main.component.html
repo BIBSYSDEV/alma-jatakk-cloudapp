@@ -1,0 +1,36 @@
+<div>
+  <h1>Skriv inn eller skann strekkode</h1>
+  <form class="search-form" [formGroup]="formdata" (ngSubmit)="onClickSubmit(formdata.value)" id="searchForm">
+    <input type="text" class="fortextbox" name="barcode" placeholder="barcode" formControlName="barcode" />
+    <br /><br />
+
+
+    <button mat-flat-button color="primary" class="forsubmit" description="Search">Search
+    </button>
+  </form>
+</div>
+
+<div class="results" *ngIf="item && item.copieswanted>0">
+  <p>Barcode entered: {{item.barcode}} <br />
+    Number of items wanted by repository: {{item.copieswanted}}<br /><br>
+
+    <span class="description">Number of copies wanted may take a few seconds to update </span>
+  </p>
+
+
+
+
+
+</div>
+<span class="error" *ngIf=" item && item.error !== null">
+  <p>{{item.error}}</p>
+</span>
+
+<span class="barcodeempty" *ngIf="emptybarcode">
+  You must enter a barcode</span>
+
+
+
+<div class="loading-shade" *ngIf="loading">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
