@@ -4,7 +4,6 @@ import { DebugElement } from '@angular/core';
 import { MainComponent } from './main.component';
 import { CloudAppRestService } from '@exlibris/exl-cloudapp-angular-lib';
 import {JaTakkService} from '../jatakk.service'
-import { Item } from '../item';
 import { of } from 'rxjs';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -110,13 +109,11 @@ describe('MainComponent', () => {
         frm.triggerEventHandler('ngSubmit', null)
 
     })
-    it('Should create an item when an ngSubmit is called', () => {
-        expect(component.item).toBeTruthy(); }
-    );
+   
 
     it('Should call the ALMA Rest API to retrieve item data', () => {
         expect(almaSpy).toHaveBeenCalled();
-        expect(component.item.itemdata).toBeTruthy();
+        expect(component.itemdata).toBeTruthy();
     })
 
     it('Should call the JaTakk Rest API', () => {
@@ -125,7 +122,7 @@ describe('MainComponent', () => {
     });
 
     it('Should get the number of copies wanted from the JaTakk Rest API', () => {
-        expect(component.item.copieswanted).toBe(1);
+        expect(component.copiesWanted).toBe(1);
     }
         )
 

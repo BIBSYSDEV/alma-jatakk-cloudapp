@@ -48,8 +48,11 @@ export class MainComponent implements OnInit, OnDestroy {
     }
     else {  
       this.barcode = data.barcode
+      // Lookup barcode in Alma
       this.itemdata = await this._lookupByBarcode(data.barcode).catch(error =>{this.errorMessage = error.message});
-      if(!this.errorMessage) {
+     
+      // Parse MMS and ISBN from response and lookup at Repository Library
+      if (!this.errorMessage) {
         this._get_identifiers();
         this._lookUpAtNb();
       }
@@ -96,7 +99,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.copiesWanted = null;
     this.statusAtNb = null;
     let res = null;
-    // Try first with the mms ID
+    // Try first with the mms ID, then with ISBN which is less precise
     if (this.mms) {
       let res = await this._lookUpMms().catch(error => {
         console.log(error.message);
@@ -119,27 +122,29 @@ export class MainComponent implements OnInit, OnDestroy {
     }
 
     else {
-      this.copiesWanted = 1 // Assume NB wants a copy if not found
+      this.copiesWanted = 1 // Assume the Repository Library wants a copy if not found
     }
 
   }
 
   private _setCopiesWanted(res: Response) {
     if (this.statusAtNb === 0){
-      this.copiesWanted = 1
+      this.copiesWanted = 1 // Assume the Repository Library wants a copy if we received a 0 status from JaTakk
     }
     else {
-     
+     // Extract the number of copies wanted from the results
       this.copiesWanted = res['titles'][0]['copieswanted']
       
     }
     
   }
   private _retrive_mms() {
+    const MMS_PREFIX = "(EXLNZ-47BIBSYS_NETWORK)"
+    // Extraxt the MMS from the "Other system number" field. 
         let bibdata = this.itemdata.bib_data;
         let network_numbers = bibdata.network_number;
         network_numbers.forEach((num: string) => {
-            if (num.startsWith("(EXLNZ-47BIBSYS_NETWORK)")) {
+            if (num.startsWith(MMS_PREFIX)) {
                 let splitnum = num.split(")");
               this.mms = splitnum[1]
 
