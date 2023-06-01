@@ -133,8 +133,8 @@ export const RES = {
     };
 
     export const BARCODE = "144754ca0";
-    export const ALMARESTURL = "/items?item_barcode=144754ca0'";
-    export const NBJATAKKURL = "https://depotbiblioteket.no/r/jatakk/1.0/data/mode=check?mmsid={MMS}"
+    export const ALMA_REST_URL = "/items?item_barcode=144754ca0'";
+    export const NB_JA_TAKK_URL = "https://depotbiblioteket.no/r/jatakk/1.0/data/mode=check?mmsid={MMS}"
     export const NBRES = {
     "status": 1,
     "bibnavn": "Depotbiblioteket",

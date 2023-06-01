@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { MainComponent } from './main.component';
 import { CloudAppRestService } from '@exlibris/exl-cloudapp-angular-lib';
-import {JaTakkService} from '../api.service'
+import {JaTakkService} from '../jatakk.service'
 import { Item } from '../item';
 import { of } from 'rxjs';
 import { HttpClient, HttpHandler } from '@angular/common/http';
@@ -73,11 +73,21 @@ describe('MainComponent', () => {
         fixture.detectChanges();
         let nobarcodemessage = fixture.debugElement.query(By.css('.barcodeempty'))
         expect(nobarcodemessage.nativeElement).toBeTruthy();
-        component.formdata.value = BARCODE;
-        frm.triggerEventHandler('ngSubmit', BARCODE)
-        fixture.detectChanges();
-        expect(nobarcodemessage).toBeFalsy();
+       
     })
+
+    it('Should not display an "empty barcode" warning when the barcode field is populated', () => {
+        let inputBox = fixture.debugElement.query(By.css('.fortextbox')).nativeElement;
+        inputBox.value = BARCODE;
+        frm.triggerEventHandler('ngSubmit', null)
+        fixture.detectChanges();
+        let nobarcodemessage = fixture.debugElement.query(By.css('.barcodeempty'))
+        expect(nobarcodemessage).toBeFalsy();
+
+
+
+    })
+
     it('Should not display the results section before a search', () => {
         const results = fixture.debugElement.query(By.css('.results'));
         expect(results).toBeFalsy();

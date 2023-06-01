@@ -10,9 +10,9 @@
   </form>
 </div>
 
-<div class="results" *ngIf="item && item.copieswanted>0">
-  <p>Barcode entered: {{item.barcode}} <br />
-    Number of items wanted by repository: {{item.copieswanted}}<br /><br>
+<div class="results" *ngIf="barcode && !errorMessage">
+  <p>Barcode entered: {{barcode}} <br />
+    Number of items wanted by repository: {{copiesWanted}}<br /><br>
 
     <span class="description">Number of copies wanted may take a few seconds to update </span>
   </p>
@@ -22,11 +22,11 @@
 
 
 </div>
-<span class="error" *ngIf=" item && item.error !== null">
-  <p>{{item.error}}</p>
+<span class="error" *ngIf="errorMessage && barcode">
+  <p>{{errorMessage}}</p>
 </span>
 
-<span class="barcodeempty" *ngIf="emptybarcode">
+<span class="barcodeempty" *ngIf="!barcode">
   You must enter a barcode</span>
 
 
