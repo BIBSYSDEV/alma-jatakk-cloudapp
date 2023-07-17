@@ -1,8 +1,12 @@
 {
-   "id": "ja-takk-service-for-the-norwegian-national-library",
-   "title": "JaTakk Service for the Norwegian National Library",
-   "subtitle": "Lookup an item and check if NB wants a copy",
+   "id": "depot-jatakk",
+   "title": "JaTakk - Norwegian Repository Library",
+   "subtitle": "Lookup an item and check if NB depot wants a copy",
    "author": "Audun Skorstad (Sikt)",
+   "icon": {
+      "type": "url",
+      "value": "/assets/sikt.png"
+   },
    "contentSecurity": {
       "connectSrc": [
          "https://depotbiblioteket.no/r/jatakk/"
