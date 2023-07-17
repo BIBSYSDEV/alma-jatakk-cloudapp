@@ -44,9 +44,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   async onClickSubmit(data) {
     if (!data) {
-      this.barcode = null
+      this.barcode = null;
     }
-    else {  
+    else {
+      this.submitted = true;  ;
       this.barcode = data.barcode
       // Lookup barcode in Alma
       this.itemdata = await this._lookupByBarcode(data.barcode).catch(error =>{this.errorMessage = error.message});
@@ -65,7 +66,7 @@ export class MainComponent implements OnInit, OnDestroy {
     const BARCODE_PATH = '/items?item_barcode=';
     this.errorMessage = null;
     this.emptybarcode = false;
-    this.itemdata = false 
+    this.itemdata = false; 
     let url = BARCODE_PATH + bc
     return new Promise ((resolve, reject) =>{
       this.almaService.call(url).subscribe(data => { 

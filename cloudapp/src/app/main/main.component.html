@@ -1,5 +1,5 @@
 <div>
-  <h1>Skriv inn eller skann strekkode</h1>
+  <h1>Enter or scan barcode</h1>
   <form class="search-form" [formGroup]="formdata" (ngSubmit)="onClickSubmit(formdata.value)" id="searchForm">
     <input type="text" class="fortextbox" name="barcode" placeholder="barcode" formControlName="barcode" />
     <br /><br />
@@ -26,7 +26,7 @@
   <p>{{errorMessage}}</p>
 </span>
 
-<span class="barcodeempty" *ngIf="!barcode">
+<span class="barcodeempty" *ngIf="submitted && !barcode">
   You must enter a barcode</span>
 
 
