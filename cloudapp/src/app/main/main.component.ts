@@ -102,7 +102,7 @@ export class MainComponent implements OnInit, OnDestroy {
     let res = null;
     // Try first with the mms ID, then with ISBN which is less precise
     if (this.mms) {
-      let res = await this._lookUpMms().catch(error => {
+       res = await this._lookUpMms().catch(error => {
         console.log(error.message);
         this.errorMessage = error.message
       })
@@ -110,7 +110,7 @@ export class MainComponent implements OnInit, OnDestroy {
       
     }
       else if (this.isbn) {
-      let res = await this._lookUpIsbn().catch(error =>{console.log(error.message);
+       res = await this._lookUpIsbn().catch(error =>{console.log(error.message);
       this.errorMessage = error.message
     })
     
@@ -123,6 +123,7 @@ export class MainComponent implements OnInit, OnDestroy {
     }
 
     else {
+  
       this.copiesWanted = 1 // Assume the Repository Library wants a copy if not found
     }
 
@@ -135,6 +136,7 @@ export class MainComponent implements OnInit, OnDestroy {
     else {
      // Extract the number of copies wanted from the results
       this.copiesWanted = res['titles'][0]['copieswanted']
+      console.log(this.copiesWanted)
       
     }
     
