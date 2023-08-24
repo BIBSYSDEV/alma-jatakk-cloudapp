@@ -146,7 +146,7 @@ export class MainComponent implements OnInit, OnDestroy {
     // Extraxt the MMS from the "Other system number" field. 
         let bibdata = this.itemdata.bib_data;
         let network_numbers = bibdata.network_number;
-    if (network_numbers.length > 0) {
+    if (network_numbers) {
       network_numbers.forEach((num: string) => {
         if (num.startsWith(MMS_PREFIX)) {
           let splitnum = num.split(")");
