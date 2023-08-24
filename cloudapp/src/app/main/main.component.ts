@@ -146,13 +146,15 @@ export class MainComponent implements OnInit, OnDestroy {
     // Extraxt the MMS from the "Other system number" field. 
         let bibdata = this.itemdata.bib_data;
         let network_numbers = bibdata.network_number;
-        network_numbers.forEach((num: string) => {
-            if (num.startsWith(MMS_PREFIX)) {
-                let splitnum = num.split(")");
-              this.mms = splitnum[1]
+    if (network_numbers.length > 0) {
+      network_numbers.forEach((num: string) => {
+        if (num.startsWith(MMS_PREFIX)) {
+          let splitnum = num.split(")");
+          this.mms = splitnum[1]
 
-            }
-        });
+        }
+      });
+    }
   }
   
   private _retrive_isbn() {
