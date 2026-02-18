@@ -5,7 +5,6 @@ import { CloudAppRestService} from '@exlibris/exl-cloudapp-angular-lib';
 import { FormGroup, FormControl } from '@angular/forms';
 import { JaTakkService } from '../jatakk.service';
 import {catchError} from 'rxjs/operators';
-import { error } from '@angular/compiler/src/util';
 
 
 @Component({
