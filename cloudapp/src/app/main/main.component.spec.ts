@@ -21,6 +21,7 @@ describe('MainComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MainComponent],
+            imports: [ReactiveFormsModule],
             providers: [
                 CloudAppRestService,
                 JaTakkService,
@@ -39,8 +40,7 @@ describe('MainComponent', () => {
             fixture = TestBed.createComponent(MainComponent);
             component = fixture.componentInstance;
             compiled = fixture.debugElement.nativeElement;
-            component.formdata = new FormGroup({"value": new FormControl('')})
-            component.formdata.value = BARCODE
+            component.formdata = new FormGroup({barcode: new FormControl(BARCODE)})
             frm = fixture.debugElement.query(By.css('.search-form'));
 
          
@@ -65,9 +65,7 @@ describe('MainComponent', () => {
         )
     
     it('Should display a warning if the barcode field is empty', () =>{
-        let inputBox = fixture.debugElement.query(By.css('.fortextbox')).nativeElement;
-        inputBox.Value = null
-        component.formdata.value = null
+        component.formdata.controls['barcode'].setValue(null);
         frm.triggerEventHandler('ngSubmit', null)
         fixture.detectChanges();
         let nobarcodemessage = fixture.debugElement.query(By.css('.barcodeempty'))
@@ -103,12 +101,12 @@ describe('MainComponent', () => {
     }
     );
 
-    beforeEach(() => {
+    beforeEach(fakeAsync(() => {
         almaSpy = almaRestSpy(fixture);
         nbSpy = jaTakkSpy(fixture);
         frm.triggerEventHandler('ngSubmit', null)
-
-    })
+        tick();
+    }))
    
 
     it('Should call the ALMA Rest API to retrieve item data', () => {
@@ -142,7 +140,10 @@ describe('MainComponent', () => {
 
     const jaTakkSpy = (fixture: ComponentFixture<any>) =>{
         let mockJatakkService = fixture.debugElement.injector.get(JaTakkService);
-        return spyOn<any>(mockJatakkService, 'lookUpJaTakk').and.callFake((url: String)=>{
+        spyOn<any>(mockJatakkService, 'lookUpByIsbn').and.callFake((isbn: String)=>{
+            return of (NBRES)
+        })
+        return spyOn<any>(mockJatakkService, 'lookUpByMms').and.callFake((mms: String)=>{
             return of (NBRES)
         })
     }
